@@ -69,7 +69,8 @@ app.post("/process_login", async (req, res) => {
   // get the data
   let { username, password } = req.body;
 
-  let data = await Login.findOne({ username: username });
+    let data = await Login.findOne({ username: username });
+    // console.log(data)
   let userdetails = {
     username: data.username,
     password: data.password,
