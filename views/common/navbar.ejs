@@ -1,0 +1,81 @@
+<style>
+    nav {
+        background-color: #075E54;
+        position: fixed;
+        width: 97vw;
+        margin-top: 0;
+        height: 5rem;
+        margin-bottom: 1rem;
+        top: 0;
+    }
+
+    ul {
+        list-style-type: none;
+
+
+    }
+
+    li {
+        padding: 0;
+        list-style-type: none;
+        display: flex;
+
+
+    }
+
+    a button {
+        border: 1px solid transparent;
+        color: white;
+        background-color: black;
+        padding: 0.6rem;
+        border-radius: 10px;
+        font-style: Optima, sans-serif;
+        font-size: medium;
+        font-weight: 500;
+        position: absolute;
+        right: 2.8rem;
+    }
+
+    button:hover {
+        color: black;
+        background-color: white;
+    }
+
+    #username {
+        font-family: 'Open Sans';
+        color: white;
+        font-size: 1rem;
+    }
+
+    img {
+        width: 2.5rem;
+        height: 2rem;
+        border-radius: 10px;
+        margin-right: 4rem;
+    }
+</style>
+
+
+
+<nav>
+
+    <ul>
+
+        <li>
+            <!-- <img src="../../public/images/Chat.png" alt=""> -->
+            <img src="images/Chat.png" alt="">
+            <%if(locals.username){%>
+                <p id="username">
+                    <%=username%>
+                </p>
+                <a href="/logout"><button>Logout</button></a>
+
+                <%} else { %>
+                    <a href="/login"><button>Login</button></a>
+                    <a href="/register"><button>Register</button></a>
+                    <% } %>
+
+
+        </li>
+    </ul>
+</nav>

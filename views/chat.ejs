@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="/images/favicon-32x32.png" />
+
+    <title>chatscom</title>
+</head>
+<%- include('common/style') %>
+
+    <body>
+
+        <header>
+            <%- include('common/navbar') %>
+        </header>
+
+        <div class="chat-container">
+            <% data.forEach(function (item) { %>
+                <div class="chatbox">
+                    <div class="chat-name">
+                        <%= item.name %>:
+                    </div>
+                    <div class="chat-message">
+                        <%= item.message%><br>
+                    </div>
+
+
+                </div>
+
+                <% }) %>
+
+        </div>
+
+        <form method="post" action="/chat" id="chatform">
+
+            <input type="text" name="message" id="message" required><button type="submit" id="send"
+                onclick="handlesubmit()"><img src="/images/send.png" alt=""></button>
+        </form>
+
+        <p></p>
+        <script>
+            window.scrollTo(0, document.body.scrollHeight || document.documentElement.scrollHeight);
+
+            const handlesubmit = () => {
+                setTimeout(() => {
+                    window.location.reload()
+                }, 2000)
+            }
+        </script>
+    </body>
+
+</html>
