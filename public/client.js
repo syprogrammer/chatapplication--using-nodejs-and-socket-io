@@ -38,6 +38,9 @@ socket.on("receive", (data) => {
     messageArea.scrollTop = messageArea.scrollHeight;
   }
 });
+function scrollToBottom() {
+  messageArea.scrollTop = messageArea.scrollHeight;
+}
 form.addEventListener("submit", (e) => {
   const today = new Date();
   const date =
