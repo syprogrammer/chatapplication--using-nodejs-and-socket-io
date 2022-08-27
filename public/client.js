@@ -11,7 +11,7 @@ const append = (message, position) => {
   messageElement.classList.add(position);
   messageContainer.append(messageElement);
 };
-
+scrollToBottom();
 socket.on("receive", (data) => {
   audio.play();
   append(
