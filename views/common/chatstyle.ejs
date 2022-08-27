@@ -2,8 +2,9 @@
     body {
         font-family: 'Open Sans';
         font-size: 1;
-       max-width:100%;
-       min-width: 100%;
+        width: 100vw;
+        height: 100vh;
+        max-width: 100%;
         background-color: #ECE5DD;
     }
 
@@ -52,7 +53,7 @@
 
     .right p {
         box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
-overflow-wrap: break-word;
+        overflow-wrap: break-word;
         display: flex;
         flex-direction: column;
         border-radius: 10px 0px 10px 10px;
@@ -81,13 +82,20 @@ overflow-wrap: break-word;
         width: 2.8rem;
         border-radius: 10px;
         border: 1px solid transparent;
-      
+
         background-color: transparent;
 
     }
-    @media only screen and (max-width: 600px) {
-       
 
-    
+    .send-btn:hover {
+        width: 2.8rem;
+        background-color: transparent;
+
     }
+    img:hover{
+        width: 3.4rem;
+        height: 3.2rem;
+    }
+
+    @media only screen and (max-width: 600px) {}
 </style>
