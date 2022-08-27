@@ -26,28 +26,21 @@ socket.on("receive", (data) => {
 `,
     "left"
   );
-  const date = new Date();
-  const timeZone = "Asia/Kolkata";
-  const currentDate = new Intl.DateTimeFormat("en-US", {
-    timeStyle: "medium",
-    dateStyle: "medium",
-    timeZone,
-  });
-  let dateandtime = currentDate.format(date);
-  function scrollToBottom() {
-    messageArea.scrollTop = messageArea.scrollHeight;
-  }
+  
+ 
 });
 function scrollToBottom() {
   messageArea.scrollTop = messageArea.scrollHeight;
 }
 form.addEventListener("submit", (e) => {
-  const today = new Date();
-  const date =
-    today.getFullYear() + "-" + (today.getMonth() + 1) + "-" + today.getDate();
-  const time =
-    today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
-  const dateTime = date + " " + time;
+ const date = new Date();
+ const timeZone = "Asia/Kolkata";
+ const currentDate = new Intl.DateTimeFormat("en-US", {
+   timeStyle: "medium",
+   dateStyle: "medium",
+   timeZone,
+ });
+ let dateTime = currentDate.format(date);
  
   e.preventDefault();
   const message = messageInput.value;
