@@ -30,7 +30,7 @@ socket.on("receive", (data) => {
  
 });
 function scrollToBottom() {
-  messageArea.scrollTop = messageArea.scrollHeight;
+  window.scrollTo(0, document.body.scrollHeight);
 }
 form.addEventListener("submit", (e) => {
  const date = new Date();
