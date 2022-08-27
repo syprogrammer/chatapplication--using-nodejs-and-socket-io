@@ -8,13 +8,19 @@ const LoginSchema = new mongoose.Schema({
   username: String,
   password: {
     type: Schema.Types.Mixed,
-    require: true,
+    required: true,
   },
 });
 const chatSchema = new mongoose.Schema({
   name: String,
-  message: String,
+   message: {
+
+    type: String,
+    required: true,
+  },
+  Date:{type: String, default: Date.now},
 });
+
 
 const Login = mongoose.model("Loginmodel", LoginSchema);
 const Chat = mongoose.model("chats", chatSchema);
