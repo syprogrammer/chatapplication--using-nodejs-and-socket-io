@@ -135,7 +135,7 @@ const dateandtime = currentDate.format(date);
 io.on("connection", (socket) => {
   console.log("Connected...");
   const ck = cookie.parse(socket.request.headers.cookie);
-  console.log(ck.username);
+ 
 
   socket.on("send", async (message) => {
     let chatdata = {
@@ -147,7 +147,7 @@ io.on("connection", (socket) => {
     let data = new Chat(chatdata);
 
     let result = await data.save();
-    console.log(result);
+    
 
     socket.broadcast.emit("receive", chatdata);
   });
