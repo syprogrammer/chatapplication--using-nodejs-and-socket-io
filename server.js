@@ -115,21 +115,47 @@ app.get("/chat", isloggedin, async (req, res) => {
   res.render("chat", { data, username });
 });
 
-app.post("/chat", isloggedin, async (req, res, next) => {
-  let username = req.cookies.username;
-  let chatdata = {
-    name: username,
-    message: req.body.message,
-  };
-  console.log("chatdat is ", chatdata);
-  let data = new Chat(chatdata);
 
-  let result = await data.save();
+const http = require("http").createServer(app);
+const io = require("socket.io")(http);
+var cookie = require("cookie");
 
-  console.log(result);
 
-  res.redirect("/chat");
-  next();
+
+const date = new Date();
+
+const timeZone = "Asia/Kolkata";
+const currentDate = new Intl.DateTimeFormat("en-US", {
+  timeStyle: "medium",
+  dateStyle: "medium",
+  timeZone,
+});
+const dateandtime = currentDate.format(date);
+
+io.on("connection", (socket) => {
+  console.log("Connected...");
+  const ck = cookie.parse(socket.request.headers.cookie);
+  console.log(ck.username);
+
+  socket.on("send", async (message) => {
+    let chatdata = {
+      name: ck.username,
+      message: message,
+      Date: JSON.stringify(dateandtime),
+    };
+
+    let data = new Chat(chatdata);
+
+    let result = await data.save();
+    console.log(result);
+
+    socket.broadcast.emit("receive", chatdata);
+  });
 });
 
-app.listen(PORT);
+http.listen(PORT, () => {
+  console.log(`Listening on port ${PORT}`);
+});
+
+
+

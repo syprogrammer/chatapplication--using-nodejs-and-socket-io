@@ -4,53 +4,58 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="image/png" href="/images/favicon-32x32.png" />
-
-    <title>chatscom</title>
+    <title>Chatcomss</title>
 </head>
-<%- include('common/style') %>
+<%- include('common/chatstyle') %>
 
     <body>
-
         <header>
             <%- include('common/navbar') %>
         </header>
+        <div id="chat-container">
+            <div id="chat-area">
+                <% data.forEach(function (item) { %>
+                    <% if (item.name==username) { %>
+                        <div class="right">
+                            <p>
+                                <span class="chat-name">You</span>
+                                <span class="chat-msg">
+                                    <%= item.message%>
+                                </span>
+                            </p>
+                            <span class="chat-date">
+                                <%= item.Date %>
+                            </span>
+                        </div>
+                        <%} else { %>
+                            <div class="left">
+                                <p>
+                                    <span class="chat-name">
+                                        <%= item.name%>
+                                    </span>
+                                    <span class="chat-msg">
+                                        <%= item.message%>
+                                    </span>
+                                </p>
+                                <span class="chat-date">
+                                    <%= item.Date %>
+                                </span>
+                            </div>
+                            <% } %>
+                                <% }) %>
 
-        <div class="chat-container">
-            <% data.forEach(function (item) { %>
-                <div class="chatbox">
-                    <div class="chat-name">
-                        <%= item.name %>:
-                    </div>
-                    <div class="chat-message">
-                        <%= item.message%><br>
-                    </div>
-
-
-                </div>
-
-                <% }) %>
-
+            </div>
+            <div id="send-container">
+                <form id="form-container">
+                    <input type="text" name="message" id="messageinp" required>
+                    <button type="submit" class="send-btn"><img src="/images/send.png" alt=""></button>
+                </form>
+            </div>
         </div>
-
-        <form method="post" action="/chat" id="chatform">
-
-            <input type="text" name="message" id="message" required><button type="submit" id="send"
-                onclick="handlesubmit()"><img src="/images/send.png" alt=""></button>
-        </form>
-
-        <p></p>
-        <script>
-            window.scrollTo(0, document.body.scrollHeight || document.documentElement.scrollHeight);
-
-            const handlesubmit = () => {
-                setTimeout(() => {
-                    window.location.reload()
-                }, 2000)
-            }
-        </script>
     </body>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="/client.js"></script>
 
 </html>
