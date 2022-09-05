@@ -75,20 +75,22 @@ app.post("/process_login", async (req, res, next) => {
   let { username, password } = req.body;
   try {
      let data = await Login.findOne({ username: username });
-  // console.log(data)
+  console.log(data)
   let userdetails = {
     username: data.username,
     password: data.password,
   };
 
   // check if user is entering correct credentials
-
+if(
   username === userdetails["username"] &&
-      password === userdetails["password"]
-     // saving the data to the cookies
-  res.cookie("username", username);
-  // redirect
-  return res.redirect("/chat");
+  password === userdetails["password"]) {
+    // saving the data to the cookies
+    res.cookie("username", username);
+    // redirect
+    return res.redirect("/chat");
+  }
+   
   } catch (error) {
     return res.redirect("/login?msg=fail");
     console.log(error)
