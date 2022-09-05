@@ -25,7 +25,7 @@ app.set("view engine", ".ejs");
 
 
 // a port number to expose the server
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 5000;
 
 
 
@@ -43,17 +43,17 @@ app.get("/", (req, res, next) => {
 });
 
 app.get("/login", (req, res) => {
-//   check if there is a msg query
+  //   check if there is a msg query
   let bad_auth = req.query.msg ? true : false;
 
-//   if there exists, send the error.
+  //   if there exists, send the error.
   if (bad_auth) {
     return res.render("login", {
       error: "Invalid username or password",
     });
   } else {
-//   else just render the login
-  return res.render("login");
+    //   else just render the login
+    return res.render("login");
   }
 });
 
@@ -65,30 +65,36 @@ app.post("/register", async (req, res, next) => {
   next();
 });
 
-app.post("/process_login", async (req, res) => {
+app.post("/process_login", async (req, res, next) => {
   // get the data
-  let { username, password } = req.body;
+  try {
 
-    let data = await Login.findOne({ username: username });
-    // console.log(data)
+  } catch (error) {
+
+  }
+  let { username, password } = req.body;
+  try {
+     let data = await Login.findOne({ username: username });
+  // console.log(data)
   let userdetails = {
     username: data.username,
     password: data.password,
   };
 
   // check if user is entering correct credentials
-  if (
-    username === userdetails["username"] &&
-    password === userdetails["password"]
-  ) {
-    // saving the data to the cookies
-    res.cookie("username", username);
-    // redirect
-    return res.redirect("/chat");
-  } else {
-    // redirect with a fail msg
+
+  username === userdetails["username"] &&
+      password === userdetails["password"]
+     // saving the data to the cookies
+  res.cookie("username", username);
+  // redirect
+  return res.redirect("/chat");
+  } catch (error) {
     return res.redirect("/login?msg=fail");
+    console.log(error)
   }
+   
+
 });
 
 app.get("/logout", (req, res) => {
@@ -135,21 +141,25 @@ const dateandtime = currentDate.format(date);
 io.on("connection", (socket) => {
   console.log("Connected...");
   const ck = cookie.parse(socket.request.headers.cookie);
- 
+
 
   socket.on("send", async (message) => {
-    let chatdata = {
-      name: ck.username,
-      message: message,
-      Date: JSON.stringify(dateandtime),
-    };
+    try {
+      let chatdata = {
+        name: ck.username,
+        message: message,
+        Date: JSON.stringify(dateandtime),
+      };
 
-    let data = new Chat(chatdata);
+      let data = new Chat(chatdata);
 
-    let result = await data.save();
+      let result = await data.save();
+
+      socket.broadcast.emit("receive", chatdata);
+    } catch (error) {
+      console.log(error)
+    }
     
-
-    socket.broadcast.emit("receive", chatdata);
   });
 });
 

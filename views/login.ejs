@@ -11,7 +11,7 @@
 <style>
     body {
         font-family: 'Open Sans';
-        background-image: url('/images/space-background.png');
+        /* background-image: url('/images/space-background.png'); */
     }
 
     #register-container {
@@ -63,10 +63,10 @@
         }
     }
 
-    h2 {
+    h2,h4{
         margin: auto;
         width: fit-content;
-        color: white;
+
     }
 
     img {
@@ -75,16 +75,59 @@
         animation: mover 1s infinite alternate;
         margin-right: 1rem;
     }
+
+    .register-btn {
+        position: relative;
+        top: 20px;
+        border: 1px solid transparent;
+        margin: auto;
+        text-align: center;
+        padding: 10px;
+
+    }
+
+    .register-btn a {
+        text-decoration: none;
+        border-radius: 12px;
+        color: black;
+        background-color: white;
+        padding: 10px;
+    }
+
+    .register-btn a:hover {
+
+        background-color: skyblue;
+        cursor: grab;
+    }
+
+    .login-message {
+        position: relative;
+        top: 4rem;
+
+    }
+    .text-danger{
+        color:red;
+    }
 </style>
 
 <body>
     <div class="header">
         <h2>Chatcomss - made by syprogrammer</h2>
     </div>
+    <div class="login-message">
+        <h3>Login Here</h3>
+        <% if(locals.error) {%>
+            <h4 class="text-danger">
+                <%=error%>
 
+            </h4>
+            <%}%>
+                
+    </div>
     <div id="register-container">
+
         <form action="/process_login" method="post" id="register-form">
-            <h3>Login Here</h3>
+
 
             <label for="username">Username</label>
             <input type="text" placeholder="Email or Phone" name="username" id="username" autocomplete="off" required>
@@ -93,8 +136,11 @@
             <input type="password" placeholder="Password" name="password" id="password" autocomplete="off" required>
 
             <button>Login</button>
-
+            <div class="register-btn">
+                <a href="/">Register Here</a>
+            </div>
     </div>
+
     <div id="astronaut">
         <img src="/images/astronaut.png" alt="">
     </div>

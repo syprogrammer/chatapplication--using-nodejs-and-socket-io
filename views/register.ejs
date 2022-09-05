@@ -11,7 +11,7 @@
 <style>
     body {
         font-family: 'Open Sans';
-        background-image: url('/images/space-background.png');
+        /* background-image: url('/images/space-background.png'); */
     }
 
     #register-container {
@@ -49,6 +49,7 @@
         padding: 10px;
         border-radius: 10px;
 
+
     }
 
     header {}
@@ -66,7 +67,7 @@
     h2 {
         margin: auto;
         width: fit-content;
-        color: white;
+       
     }
 
     img {
@@ -74,6 +75,27 @@
         float: right;
         animation: mover 1s infinite alternate;
         margin-right: 1rem;
+    }
+    .login-btn{
+        position: relative;
+        top: 20px;
+        border: 1px solid transparent;
+        margin:auto;
+       text-align: center;
+      padding: 10px;
+       
+    }
+    .login-btn a{
+       text-decoration: none;
+       border-radius: 12px;
+       color: black;
+       background-color: white;
+       padding: 10px;
+    }
+    .login-btn a:hover{
+      
+       background-color: skyblue;
+       cursor: grab;
     }
 </style>
 
@@ -92,9 +114,13 @@
             <label for="password">Password</label>
             <input type="password" placeholder="Password" name="password" id="password" autocomplete="off"  required>
 
-            <button>Register</button>
-
+            <button type="submit">Register</button><hr>
+    <div class="login-btn">
+        <a href="/login">Already registerd? Login here</a>
     </div>
+    </div>
+    
+
     <div id="astronaut">
         <img src="/images/astronaut.png" alt="">
     </div>
