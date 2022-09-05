@@ -88,11 +88,16 @@ if(
     // saving the data to the cookies
     res.cookie("username", username);
     // redirect
-    return res.redirect("/chat");
+  return res.redirect("/chat");
+  next()
+} else {
+  return res.redirect("/login?msg=fail");
+  next();
   }
    
   } catch (error) {
-    return res.redirect("/login?msg=fail");
+    res.redirect('/login')
+    next()
     console.log(error)
   }
    
