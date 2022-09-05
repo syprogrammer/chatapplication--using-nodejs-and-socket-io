@@ -108,12 +108,23 @@
     .text-danger{
         color:red;
     }
+    @media only screen and (min-width: 500px) {
+ .container{
+          position: relative;
+          
+          width: fit-content;
+          margin: auto;
+          top: 20vh;
+    }
+ 
+}
 </style>
 
 <body>
     <div class="header">
         <h2>Chatcomss - made by syprogrammer</h2>
     </div>
+    <div class="container">
     <div class="login-message">
         <h3>Login Here</h3>
         <% if(locals.error) {%>
@@ -145,6 +156,7 @@
         <img src="/images/astronaut.png" alt="">
     </div>
     </form>
+    </div>
 </body>
 
 </html>
